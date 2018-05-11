@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Weltfussballmanager!</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<div class="container py-3">
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menü</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Neues Spiel</a>
+                <a class="dropdown-item" href="#">Speichern</a>
+                <a class="dropdown-item" href="#">Laden</a>
+                <a class="dropdown-item" href="#">Separated link</a>
+                <a class="dropdown-item" href="#">Beenden</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mannschaft</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" id="aufstellungDropdown" >Aufstellung</a>
+                <a class="dropdown-item" id="trainingDropdown" href="#">Training</a>
+
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Transfermarkt</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" id="kaufenDropdown" href="#">Kaufen</a>
+                <a class="dropdown-item" id="verkaufenDropdown" href="#">Verkaufen</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stadion</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Eintritt</a>
+                <a class="dropdown-item" href="#">Ausbauen</a>
+                <a class="dropdown-item" href="#">Zuschauerstatistik</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Ansicht</a>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">Zum Spieltag</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container py-3" id="startContainer">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Wilkommen Welfussballmanager</h1>
+            <p class="lead">This is a modified jumbotron that occupies
+                the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3" id="aufstellungContainer" style="display: none" >
+    <div class="row">
+        <div class="col">
+
+            <table class="table table-sm">
+
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Skill</th>
+                    <th scope="col">Training</th>
+                    <th scope="col">Experience</th>
+                </tr>
+                </thead>
+
+
+                <thead class="thead-light">
+                <tr>
+                    <th colspan="5">Tor</th>
+
+                </tr>
+                </thead>
+
+                <tbody id="goalBody">
+                </tbody>
+
+                <thead class="thead-light">
+                <tr>
+                    <th colspan="5">Abwehr</th>
+                </tr>
+                </thead>
+
+                <tbody id="defenceBody">
+                </tbody>
+
+                <thead class="thead-light">
+                <tr>
+                    <th colspan="5">Mittelfeld</th>
+
+                </tr>
+                </thead>
+
+                <tbody id="middfieldBody">
+                </tbody>
+
+                <thead class="thead-light">
+                <tr>
+                    <th colspan="5">Sturm</th>
+                </tr>
+                </thead>
+
+                <tbody id="strikerBody">
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="container py-3" id="trainingContainer" style="display: none">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Trainings-platzhalter</h1>
+            <p class="lead">This is a modified jumbotron that occupies
+                the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3" id="kaufenContainer" style="display: none">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Kaufen-platzhalter</h1>
+            <p class="lead">This is a modified jumbotron that occupies
+                the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3" id="verkaufenContainer" style="display: none">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Verkaufen-platzhalter</h1>
+            <p class="lead">This is a modified jumbotron that occupies
+                the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+</div>
+
+<!--<button id="addGoal">append Tor</button>-->
+<!--<button id="addDef">append Abwehrspielr</button>-->
+<!--<button id="addMiddf">append Mittelfeld</button>-->
+
+<!--<button id="addStriker">append Sturm</button>-->
+
+<script>
+    var goalies = 3;
+    var defs = 5;
+    var mids = 3;
+    var striks = 4;
+
+    var displayedContainer = "#startContainer";
+
+    var newRowContent = "";
+
+//    $(".dropdown-item").click(function(){
+//        $(displayedContainer).hide();
+//    });
+
+    $("#aufstellungDropdown").click(function () {
+        $(displayedContainer).hide();
+        $("#aufstellungContainer").show();
+
+        for (var i = 1; i <= goalies; i++) {
+
+            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Sven Ulreich Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
+            $(newRowContent).appendTo($("#goalBody"));
+        }
+
+        for (i; i <= defs + goalies; i++) {
+            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Hummels Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
+            $(newRowContent).appendTo($("#defenceBody"));
+        }
+
+        for (i; i <= defs + goalies + mids; i++) {
+            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Kroos Dummy</td><td>6</td><td>100</td><td>100</td></tr>";
+            $(newRowContent).appendTo($("#middfieldBody"));
+        }
+
+        for (i; i <= defs + goalies + mids +striks; i++) {
+            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Müller Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
+            $(newRowContent).appendTo($("#strikerBody"));
+        }
+
+        displayedContainer = "#aufstellungContainer";
+
+    });
+
+    $("#trainingDropdown").click(function () {
+        $(displayedContainer).hide();
+        $(trainingContainer).show();
+        displayedContainer = "#trainingContainer";
+        console.log("geht rein");
+        console.log(this);
+    });
+
+
+
+
+
+
+
+
+
+    $("#addMiddf").click(function(){
+        newRowContent = "<tr><th scope='row'>1</th><td>Sven Ulreich Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
+        $(newRowContent).appendTo($("#middfieldBody"));
+    });
+
+
+
+
+</script>
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
