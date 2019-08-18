@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Weltfussballmanager!</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Weltfussballmanager</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menü</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Neues Spiel</a>
+                            <a class="dropdown-item" href="#">Speichern</a>
+                            <a class="dropdown-item" href="#">Laden</a>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                            <a class="dropdown-item" href="#">Beenden</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mannschaft</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" id="aufstellungDropdown" >Aufstellung</a>
+                            <a class="dropdown-item" id="trainingDropdown" href="#">Training</a>
+
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Transfermarkt</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" id="buyPlayerDropdown" href="#" >Kaufen</a>
+                            <a class="dropdown-item" id="verkaufenDropdown" href="#">Verkaufen</a>
+                            <a class="dropdown-item" id="createNewPlayerDropdown" href="#">Neuen Spieler erstellen</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stadion</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Eintritt</a>
+                            <a class="dropdown-item" href="#">Ausbauen</a>
+                            <a class="dropdown-item" href="#">Zuschauerstatistik</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Ansicht</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Zum Spieltag</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container py-3" id="startContainer">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-3">Wilkommen Welfussballmanager</h1>
+                <p class="lead">This is a modified jumbotron that occupies
+                    the entire horizontal space of its parent.</p>
+            </div>
+        </div>
+    </div>
+
+<div class="container py-3" id="aufstellungContainer" style="display: none" >
+    <div class="row">
+        <div class="col">
+            <table class="table table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Skill</th>
+                        <th scope="col">Training</th>
+                        <th scope="col">Experience</th>
+                    </tr>
+                </thead>
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="5">Tor</th>
+                    </tr>
+                </thead>
+                <tbody id="goalBody"></tbody>
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="5">Abwehr</th>
+                    </tr>
+                </thead>
+                <tbody id="defenceBody"></tbody>
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="5">Mittelfeld</th>
+                    </tr>
+                </thead>
+                <tbody id="middfieldBody"></tbody>
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="5">Sturm</th>
+                    </tr>
+                </thead>
+                <tbody id="strikerBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3" id="trainingContainer" style="display: none">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Trainings-platzhalter</h1>
+            <p class="lead">This is a modified jumbotron that occupies
+                the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3" id="kaufenContainer" style="display: none">
+
+    <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+            <a class="nav-link active" href="#!" onclick="showAllGoalkeeper();">Torhüter</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#!">Abwehr</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#!">Mittelfeld</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#!">Angriff</a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col">
+            <table class="table table-sm" id="defendersTMTable">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Alter</th>
+                    <th scope="col">Stärke</th>
+                    <th scope="col">Marktwert</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3" id="verkaufenContainer" style="display: none">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Verkaufen-platzhalter</h1>
+            <p class="lead">This is a modified jumbotron that occupies
+                the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+</div>
+
+<!--<button id="addGoal">append Tor</button>-->
+<!--<button id="addDef">append Abwehrspielr</button>-->
+<!--<button id="addMiddf">append Mittelfeld</button>-->
+
+<!--<button id="addStriker">append Sturm</button>-->
+
+
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
