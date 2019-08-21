@@ -1,151 +1,127 @@
-var goalies = 3;
-var defs = 5;
-var mids = 3;
-var striks = 4;
+var allPlayers = null;
 
-var displayedContainer = "#startContainer";
+var playersBoughtTemp = [];
 
 var newRowContent = "";
 
 var id = "5d475fb84ce03d019c1160ad";
+var newPlayersPosition;
 
 
 $(document).ready(function () {
 
-    $('#createNewPlayerDropdown').click( function(e) {
+    init();
 
+    $('#createNewPlayerDropdown').click( function(e) {
         e.preventDefault();
-        $(displayedContainer).hide();
-        $(this.parentElement.parentElement).find(".nav-link").addClass("active")
+
+        $("#pageContainer").load("html/newPlayer.html");
 
         data = {
             name: "Jerome Boateng",
             age: 30,
-            position: "Torwart",
+            position: "Abwehr",
             marketValue: 25000000,
             skill: 7,
             // training: 105,
             // experience: 105,
         };
-
-        $.ajax({
-            url: "http://localhost:3000/api/contacts/",
-            type: "POST",
-            data: data
-        }).done(function (data) {
-            console.log(data, "ajax request done")
-        });
     });
-
-
 
     $('#buyPlayerDropdown').click( function(e) {
         e.preventDefault();
-        $(displayedContainer).hide();
-        $("#kaufenContainer").show();
-        $(this.parentElement.parentElement).find(".nav-link").addClass("active");
-
-
+        $("#pageContainer").load("html/transferMarket.html", function () {
+            showPlayersOfType("Torwart");
+        });
     });
 
 
     $("#aufstellungDropdown").click(function () {
-
-        $(displayedContainer).hide();
-        $("#aufstellungContainer").show();
-        $(this.parentElement.parentElement).find(".nav-link").addClass("active")
-
-        $.ajax({
-            url: "/send_save",
-            type: "POST",
-            dataType: "json",
-            data: {
-                "id": id
-            },
-            contentType: "application/json",
-            cache: false,
-            timeout: 5000,
-            complete: function() {
-                //called when complete
-                console.log('process complete');
-            },
-
-            success: function(data) {
-                console.log(data);
-                console.log('process sucess');
-            },
-
-            error: function() {
-                console.log('process error');
-            },
-        });
-
-
-        for (var i = 1; i <= goalies; i++) {
-
-            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Sven Ulreich Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
-            $(newRowContent).appendTo($("#goalBody"));
-        }
-
-        for (i; i <= defs + goalies; i++) {
-            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Hummels Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
-            $(newRowContent).appendTo($("#defenceBody"));
-        }
-
-        for (i; i <= defs + goalies + mids; i++) {
-            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Kroos Dummy</td><td>6</td><td>100</td><td>100</td></tr>";
-            $(newRowContent).appendTo($("#middfieldBody"));
-        }
-
-        for (i; i <= defs + goalies + mids +striks; i++) {
-            newRowContent = "<tr><th scope='row'>" + i + "</th><td>Müller Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
-            $(newRowContent).appendTo($("#strikerBody"));
-        }
-
-        displayedContainer = "#aufstellungContainer";
+        e.preventDefault();
+        $("#pageContainer").load("html/team.html");
 
     });
+
 
     $("#trainingDropdown").click(function () {
-        $(displayedContainer).hide();
-        $(trainingContainer).show();
-        $(this.parentElement.parentElement).find(".nav-link").addClass("active")
-
-        displayedContainer = "#trainingContainer";
-        console.log("geht rein");
-        console.log(this);
+        e.preventDefault();
     });
-
-
-
-});
 
     $("#addMiddf").click(function(){
         newRowContent = "<tr><th scope='row'>1</th><td>Sven Ulreich Dummys</td><td>6</td><td>100</td><td>100</td></tr>";
         $(newRowContent).appendTo($("#middfieldBody"));
     });
 
+    var $form = $('form');
+    $form.submit(function(){
+        $.ajax({
+            url: "http://localhost:3000/api/contacts/",
+            type: "POST",
+            data: $form.find("input").serialize(),
+            success: function(response){
+                $(".successMessage").text("Spieler " + response.data.name + " wurder erfolgreich angelegt");
+            }
+        }).done(function (data) {
+            $form.get(0).reset();
+            console.log(data, "ajax request done")
+        });
 
-function showAllGoalkeeper(){
+        return false;
+    });
+
+});
+
+function init() {
+
+    $(".nav .nav-link").on("click", function(){
+        $(".nav").find(".active").removeClass("active");
+        $(this).addClass("active");
+    });
+
     $.ajax({
         url: "http://localhost:3000/api/contacts/",
         type: "GET",
         success: function (data) {
+            //TODO: Array of Objects anlegen
+            allPlayers = data.data;
 
-            $.each(data.data, function (index) {
-
-
-                newRowContent = "<tr>" +
-                    "<th scope='row'>" + index + "</th>" +
-                    "<td>" + this.name + "</td>" +
-                    "<td>" + this.age + "</td>" +
-                    "<td>" + this.skill + "</td>" +
-                    "<td>" + this.marketValue + "</td>" +
-                    "</tr>";
-                $(newRowContent).appendTo($("#defendersTMTable tbody"));
-            });
         }
-    }).done(function () {
-        console.log("ajax request done")
+    }).done(function (data) {
+        console.log(data, "ajax request done")
     });
+
+}
+
+function showPlayersOfType(position){
+
+    $("#defendersTMTable tbody").html("");
+
+    $.each(allPlayers, function (index) {
+        if(this.position !== position) return;
+
+
+        newRowContent = "<tr class='playerRow' id='" + this._id + "'>" +
+            "<th scope='row'>" + index + "</th>" +
+            "<td>" + this.name + "</td>" +
+            "<td>" + this.age + "</td>" +
+            "<td>" + this.skill + "</td>" +
+            "<td>" + Number(this.marketValue).toLocaleString('de') + " \u20AC"  + "</td>" +
+            "<td>" +
+                "<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">" +
+                    "<label class=\"btn btn-outline-dark\">" +
+                        "<input type=\"checkbox\" checked autocomplete=\"off\">Buy" +
+                    "</label>" +
+                "</div>"+
+            "</td>" +
+            "</tr>";
+        $(newRowContent).appendTo($("#defendersTMTable tbody"));
+    });
+
+    $(".btn-group.btn-group-toggle").on("click", function(){
+        debugger
+        $(this).closest(".playerRow").attr('id');
+        // playersBoughtTemp
+
+    });
+
 }

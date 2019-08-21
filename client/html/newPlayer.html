@@ -1,0 +1,64 @@
+
+
+    <form class="form-horizontal"  action="http://localhost:3000/api/contacts/" method="post">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="newPlayerNameInput">Name</label>
+                    <input type="text" class="form-control" id="newPlayerNameInput" name="name">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="newPlayerAgeInput">Alter</label>
+                    <input type="text" class="form-control" id="newPlayerAgeInput" name="age">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="newPlayerSkillInput">Skill</label>
+                    <input type="text" class="form-control" id="newPlayerSkillInput" name="skill">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="newPlayerMarketValueInput">Marktwert</label>
+                    <input type="text" class="form-control" id="newPlayerMarketValueInput" name="marketValue">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="goalkeeperCheck" name="position" value="Tor" class="custom-control-input" onclick="setPlayerPosition(this.value);">
+                    <label class="custom-control-label" for="goalkeeperCheck">Tor</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="defenderCheck" name="position" value="Abwehr" class="custom-control-input" onclick="setPlayerPosition(this.value);">
+                    <label class="custom-control-label" for="defenderCheck">Abwehr</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="midfielderCheck" name="position" value="Mittelfeld" class="custom-control-input" onclick="setPlayerPosition(this.value);">
+                    <label class="custom-control-label" for="midfielderCheck">Mittelfeld</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="strikerCheck" name="position" value="Sturm" class="custom-control-input" onclick="setPlayerPosition(this.value);">
+                    <label class="custom-control-label" for="strikerCheck">Sturm</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <span class="successMessage"></span>
+            </div>
+        </div>
+    </form>

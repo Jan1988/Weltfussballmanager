@@ -1,0 +1,41 @@
+<ul class="nav nav-tabs nav-justified">
+    <li class="nav-item">
+        <a class="nav-link active" href="#!" onclick="showPlayersOfType('Torwart');">Torhüter</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#!" onclick="showPlayersOfType('Abwehr');">Abwehr</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#!" onclick="showPlayersOfType('Mittelfeld');">Mittelfeld</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#!" onclick="showPlayersOfType('Sturm');">Angriff</a>
+    </li>
+</ul>
+
+<div class="row">
+    <div class="col">
+        <table class="table table-sm" id="defendersTMTable">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Alter</th>
+                <th scope="col">Stärke</th>
+                <th scope="col">Marktwert</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(".nav .nav-link").on("click", function(){
+        $(".nav").find(".active").removeClass("active");
+        $(this).addClass("active");
+    });
+
+
+</script>
