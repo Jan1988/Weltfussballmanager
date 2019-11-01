@@ -1,0 +1,17 @@
+body {
+
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 8vh;
+}
+.playerRow:hover{
+    cursor: pointer;
+}
+.disabledPlayerRow{
+    pointer-events: none;
+    color: gray;
+    opacity: 0.5;
+}

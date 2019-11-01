@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs nav-justified">
     <li class="nav-item">
-        <a class="nav-link active" href="#!" onclick="showPlayersOfType('Torwart');">Torhüter</a>
+        <a class="nav-link active" href="#!" onclick="showPlayersOfType('Tor');">Torhüter</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#!" onclick="showPlayersOfType('Abwehr');">Abwehr</a>
@@ -15,7 +15,7 @@
 
 <div class="row">
     <div class="col">
-        <table class="table table-sm" id="defendersTMTable">
+        <table class="table table-sm" id="playersTMTable1">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -23,11 +23,29 @@
                 <th scope="col">Alter</th>
                 <th scope="col">Stärke</th>
                 <th scope="col">Marktwert</th>
-                <th scope="col"></th>
             </tr>
             </thead>
             <tbody></tbody>
         </table>
+    </div>
+    <div class="col">
+        <table class="table table-sm" id="playersTMTable2">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Alter</th>
+                <th scope="col">Stärke</th>
+                <th scope="col">Marktwert</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary mt-5" onclick="buyPlayersFix();">Spieler verpflichten</button>
     </div>
 </div>
 
@@ -36,6 +54,8 @@
         $(".nav").find(".active").removeClass("active");
         $(this).addClass("active");
     });
+
+
 
 
 </script>

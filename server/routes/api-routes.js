@@ -9,19 +9,30 @@ router.get('/', function (req, res) {
     });
 });
 
-// Import contact controller
-var contactController = require('../controllers/contactController');
+// Import player controller
+var playerController = require('../controllers/playerController');
 
-// Contact routes
-router.route('/contacts')
-    .get(contactController.index)
-    .post(contactController.new);
+// Player routes
+router.route('/players')
+    .get(playerController.index)
+    .post(playerController.new);
 
-router.route('/contacts/:contact_id')
-    .get(contactController.view)
-    .patch(contactController.update)
-    .put(contactController.update)
-    .delete(contactController.delete);
+router.route('/players/:player_id')
+    .get(playerController.view)
+    .patch(playerController.update)
+    .put(playerController.update)
+    .delete(playerController.delete);
+
+// Team routes
+router.route('/team')
+    .get(playerController.index)
+    .post(playerController.new);
+
+router.route('/team/:player_id')
+    .get(playerController.view)
+    .patch(playerController.update)
+    .put(playerController.update)
+    .delete(playerController.delete);
 
 
 // Export API routes

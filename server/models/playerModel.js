@@ -1,8 +1,8 @@
-// contactModel.js
+// playerModel.js
 var mongoose = require('mongoose');
 
 // Setup schema
-var contactSchema = mongoose.Schema({
+var playerSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -31,6 +31,10 @@ var contactSchema = mongoose.Schema({
         type: Number,
         default: 100,
     },
+    isSold:{
+        type: Boolean,
+        default: false
+    }
     // create_date: {
     //     type: Date,
     //     default: Date.now
@@ -38,7 +42,7 @@ var contactSchema = mongoose.Schema({
 });
 
 // Export Contact model
-var Contact = module.exports = mongoose.model('contact', contactSchema);
+var Player = module.exports = mongoose.model('player', playerSchema);
 module.exports.get = function (callback, limit) {
-    Contact.find(callback).limit(limit);
+    Player.find(callback).limit(limit);
 };
