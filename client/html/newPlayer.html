@@ -1,6 +1,6 @@
 
 
-    <form class="form-horizontal"  action="http://localhost:3000/api/contacts/" method="post">
+    <form class="form-horizontal" action="" method="post">
 
         <div class="row">
             <div class="col-sm-6">
@@ -67,6 +67,7 @@
         var $form = $('form');
 
         $form.submit(function(){
+            console.log($form.find("input").serialize());
 
             $.ajax({
                 url: "http://localhost:3000/api/players/",

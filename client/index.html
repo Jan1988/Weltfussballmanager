@@ -13,6 +13,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/MyClass.js"></script>
     <script src="js/script.js"></script>
 
 
@@ -21,7 +22,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="#">Weltfussballmanager</a>
+            <a class="navbar-brand" href="http://localhost:63342/Weltfussballmanager/client/index.html">Weltfussballmanager</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,11 +32,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menü</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Neues Spiel</a>
+                            <a class="dropdown-item" id="createNewSessionDropdown" >Neues Spiel</a>
                             <a class="dropdown-item" href="#">Speichern</a>
                             <a class="dropdown-item" href="#">Laden</a>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                            <a class="dropdown-item" href="#">Beenden</a>
+                            <a class="dropdown-item" >Separated link</a>
+                            <a class="dropdown-item" >Beenden</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -48,9 +49,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Transfermarkt</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" id="buyPlayerDropdown" href="#" >Kaufen</a>
-                            <a class="dropdown-item" id="verkaufenDropdown" href="#">Verkaufen</a>
-                            <a class="dropdown-item" id="createNewPlayerDropdown" href="#">Neuen Spieler erstellen</a>
+                            <a class="dropdown-item" id="buyPlayerDropdown" >Kaufen</a>
+                            <a class="dropdown-item" id="verkaufenDropdown">Verkaufen</a>
+                            <a class="dropdown-item" id="createNewPlayerDropdown">Neuen Spieler erstellen</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

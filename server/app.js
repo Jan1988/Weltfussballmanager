@@ -75,7 +75,7 @@ var port = process.env.port || 3000;
 
 // Send message for default URL
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname+'/views/index.html'));
+    res.sendFile(path.join(__dirname+'/views/about.html'));
 });
 
 

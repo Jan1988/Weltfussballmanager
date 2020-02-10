@@ -30,6 +30,7 @@ exports.new = function (req, res) {
     player.skill = req.body.skill;
     player.experience = req.body.experience ? req.body.experience : player.experience;
     player.training = req.body.training ? req.body.training : player.training;
+    player.team = req.body.team;
     // player.isSold = req.body.isSold ? req.body.isSold : player.isSold;
 
     // save the player and check for errors
@@ -58,27 +59,26 @@ exports.view = function (req, res) {
 // Handle update player info
 exports.update = function (req, res) {
     Player.findById(req.params.player_id, function (err, player) {
-    if (err)
-        res.send(err);
-        player.name = req.body.name ? req.body.name : player.name;
-        player.age = req.body.age;
-        player.position = req.body.position;
-        player.marketValue = req.body.marketValue;
-        player.skill = req.body.skill;
-        player.experience = req.body.experience;
-        player.training = req.body.training;
-        // player.isSold = req.body.isSold;
-
-    // save the player and check for errors
-    player.save(function (err) {
         if (err)
-            res.json(err);
-        res.json({
-            message: 'Player Info updated',
-            data: player
+            res.send(err);
+            player.name = req.body.name ? req.body.name : player.name;
+            player.age = req.body.age;
+            player.position = req.body.position;
+            player.marketValue = req.body.marketValue;
+            player.skill = req.body.skill;
+            player.experience = req.body.experience;
+            player.training = req.body.training;
+
+        // save the player and check for errors
+        player.save(function (err) {
+            if (err)
+                res.json(err);
+            res.json({
+                message: 'Player Info updated',
+                data: player
+            });
         });
     });
-});
 };
 
 // Handle delete player
