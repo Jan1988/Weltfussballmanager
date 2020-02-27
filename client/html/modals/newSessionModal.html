@@ -1,0 +1,80 @@
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Neues Spiel erstellen</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+
+                        <form role="form" id="newSessionForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="sessionNameInput" class="col-sm-2 control-label">Spielstand</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="sessionNameInput" placeholder="Spielstand" value="Spielstand 1" name="sessionName"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="managerNameInput" class="col-sm-2 control-label">Managername</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <select class="form-control">
+                                                <option>Mr.</option>
+                                                <option>Ms.</option>
+                                                <option>Mrs.</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" id="managerNameInput" class="form-control" placeholder="Name" value="Külse" name="managerName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="teamNameInput" class="col-sm-2 control-label">Teamname</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="teamNameInput" placeholder="" value="Asbach Uralt 09" name="teamName"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bankBalanceInput" class="col-sm-2 control-label">Startkapital</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="bankBalanceInput" value="150000000" name="bankBalance"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="row text-center sign-with">
+                            <div class="col-md-12">
+                                <h3>
+                                    Sign in with</h3>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="#" class="btn btn-primary">Facebook</a> <a href="#" class="btn btn-danger">
+                                    Google</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mt-2 ml-3">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="onSubmitNewSession();">Los geht's</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Lieber doch nicht</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

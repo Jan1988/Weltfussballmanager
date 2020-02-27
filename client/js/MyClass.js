@@ -1,17 +1,32 @@
 
-function MyClass(session, team, allPlayers, allPlayersSorted) {
+function MyClass(session, manager, allPlayers, allPlayersSorted) {
 
     var newRowContent = "";
     var newPlayersPosition;
+    let playersBoughtTemp = {};
 
     var self = this;
 
 
     $(document).ready(function () {
 
-        $('#createNewSessionDropdown').click( function(e) {
+        $('#createNewSessionDropdown').click(function(e) {
             e.preventDefault();
-            $("#pageContainer").load("html/newSession.html");
+            // $("#pageContainer").load("html/newSession.html");
+            $.get("html/modals/newSessionModal.html", function (data) {
+                $("#modalContainer").html(data);
+                $("#modalContainer").modal('show');
+            });
+
+        });
+        $('#saveSessionDropdown').click( function(e) {
+            e.preventDefault();
+            if($(e.currentTarget).hasClass("disabled")) return;
+            self.saveSession();
+        });
+        $('#loadSessionDropdown').click( function(e) {
+            e.preventDefault();
+            self.loadSession();
         });
         $('#createNewPlayerDropdown').click( function(e) {
             e.preventDefault();
@@ -25,14 +40,13 @@ function MyClass(session, team, allPlayers, allPlayersSorted) {
             });
         });
 
-
         $("#aufstellungDropdown").click(function (e) {
             e.preventDefault();
 
             $("#pageContainer").load("html/team.html", function () {
-                $.each(team.players, function (i, id) {
-                    var player = allPlayers[team.players[i]];
-                    newRowContent = "<tr class='playerRow' id='" + player.id + "'>" +
+                $.each(manager.players, function (i, id) {
+                    var player = allPlayers[id];
+                    newRowContent = "<tr class='playerRow' id='" + player._id + "'>" +
                         "<th scope='row'>" + (i+1) + "</th>" +
                         "<td>" + player.name + "</td>" +
                         "<td>" + player.age + "</td>" +
@@ -51,37 +65,64 @@ function MyClass(session, team, allPlayers, allPlayersSorted) {
             $(this).addClass("active");
         });
 
-
-        $("#trainingDropdown").click(function () {
+        $("#trainingDropdown").click(function (e) {
             e.preventDefault();
+        });
+        $("#verkaufenDropdown").click(function (e) {
+            e.preventDefault();
+
+            $("#pageContainer").load("html/sellTeam.html", function () {
+                $.each(manager.players, function (i, id) {
+                    var player = allPlayers[manager.players[i]];
+                    newRowContent = "<tr class='playerRow' id='" + player._id + "'>" +
+                        "<th scope='row'>" + (i+1) + "</th>" +
+                        "<td>" + player.name + "</td>" +
+                        "<td>" + player.age + "</td>" +
+                        "<td>" + player.skill + "</td>" +
+                        "<td>" + player.training + "</td>" +
+                        "<td>" + player.experience + "</td>" +
+                        "<td>" + numberToMoney(player.marketValue) + "</td>" +
+                        "</tr>";
+
+                    $(newRowContent).appendTo($("#teamTable tbody.tableBody" + player.position));
+
+                });
+                $(".playerRow").click(function(){
+                    sellPlayersTemp(this);
+                });
+            });
         });
     });
 
 
     function buyPlayersTemp(selectedPlayerRow) {
 
+        $(selectedPlayerRow).toggleClass("table-primary tempSelected");
+
         var playerId = $(selectedPlayerRow).attr('id');
         var player = allPlayers[playerId];
 
-        var isInTeam = team.players.find(function (id) {
-            return id === playerId;
-        });
-
-        if(isInTeam){
-            session.bankBalance += player.marketValue;
-            // delete playersBoughtTemp[player.id];
-            const index = team.players.indexOf(player.id);
-            if (index > -1) {
-                team.players.splice(index, 1);
-            }
+        if($(selectedPlayerRow).hasClass("tempSelected")){
+            decreaseBankBalance(player.marketValue);
+            playersBoughtTemp[player._id] = player;
         }else{
-            session.bankBalance -= player.marketValue;
-            // playersBoughtTemp[player.id] = player;
-            team.players.push(playerId);
+            increaseBankBalance(player.marketValue)
+            delete playersBoughtTemp[player._id];
         }
-        $(selectedPlayerRow).toggleClass("table-primary");
+    }
+    function sellPlayersTemp(selectedPlayerRow) {
+        $(selectedPlayerRow).toggleClass("table-primary tempSelected");
 
-        updateBalanceDisplay();
+        var playerId = $(selectedPlayerRow).attr('id');
+        var player = allPlayers[playerId];
+
+        if($(selectedPlayerRow).hasClass("tempSelected")){
+            increaseBankBalance(player.marketValue)
+            playersBoughtTemp[player._id] = player;
+        }else{
+            decreaseBankBalance(player.marketValue)
+            delete playersBoughtTemp[player._id];
+        }
     }
 
 
@@ -89,46 +130,68 @@ function MyClass(session, team, allPlayers, allPlayersSorted) {
     function setPlayerPosition(value) {
         newPlayersPosition = value;
     }
-    function updateBalanceDisplay() {
-        $("footer .balanceDisplay").text(Number(session.bankBalance).toLocaleString('de') + " \u20AC");
+    function increaseBankBalance(value){
+        manager.bankBalance += value;
+        setBalanceDisplay();
     }
-
+    function decreaseBankBalance(value){
+        manager.bankBalance -= value;
+        setBalanceDisplay();
+    }
+    function setBalanceDisplay() {
+        var financialValue = Number(manager.bankBalance).toLocaleString('de') + " \u20AC";
+        $("footer .balanceDisplay").text(financialValue);
+    }
+    function numberToMoney(number) {
+        return Number(number).toLocaleString('de') + " \u20AC"
+    }
 
 
 
     //--------------Public Methods--------------//
     this.buyPlayersFix = function() {
 
-        // var buyPlayersFixArr = [];
-        // $.each(playersBoughtTemp, function (i, player) {
-        //     buyPlayersFixArr.push(player.id)
-        // });
-
-
-        $.ajax({
-            url: "http://localhost:3000/api/teams/" + team._id,
-            type: "PATCH",
-            data: team,
-            success: function(response){
-                // var successMessageString = "Spieler " + response.data.name + " wurde erfolgreich dem Team hinzugefügt";
-                // var successMessageHtml = "<div class='row'>"+
-                //     "<div class='col'>"+
-                //     "<span>" + successMessageString + "</span>"+
-                //     "</div>"+
-                //     "</div>";
-                // $("#pageContainer").append(successMessageHtml);
-                // $(".successMessage").text();
-            }
-        }).done(function (data) {
-            $.each(team.players, function (i, id) {
-                $("#"+id).addClass("disabledPlayerRow")
-                    .removeClass("table-primary");
+        if(Object.keys(playersBoughtTemp).length){
+            $.each(playersBoughtTemp, function(i, player){
+                manager.players.push(player._id);
+                $("#" + player._id).addClass("disabledPlayerRow")
+                    .removeClass("table-primary tempSelected");
             });
-        });
+            playersBoughtTemp = {}
+        }
 
-        playersBoughtTemp = {};
+
+
     };
+
+    this.sellPlayersFix = function () {
+        if(Object.keys(playersBoughtTemp).length) {
+
+
+            $.each(playersBoughtTemp, function (i, player) {
+
+                const index = manager.players.indexOf(player._id);
+                if (index > -1) {
+                    manager.players.splice(index, 1);
+                }
+                $("#" + player._id).remove();
+                // $("#" + player._id).addClass("disabledPlayerRow")
+                //     .removeClass("table-primary tempSelected");
+            });
+            playersBoughtTemp = {};
+        }
+    };
+
+
     this.showPlayersOfType = function(position){
+
+        if(Object.keys(playersBoughtTemp).length){
+            $.each(playersBoughtTemp, function(i, player){
+                increaseBankBalance(player.marketValue);
+            });
+            playersBoughtTemp = {}
+        }
+
         $("#playersTMTable1 tbody").html("");
         $("#playersTMTable2 tbody").html("");
 
@@ -140,7 +203,7 @@ function MyClass(session, team, allPlayers, allPlayersSorted) {
                 "<td>" + player.name + "</td>" +
                 "<td>" + player.age + "</td>" +
                 "<td>" + player.skill + "</td>" +
-                "<td>" + Number(player.marketValue).toLocaleString('de') + " \u20AC"  + "</td>" +
+                "<td>" + numberToMoney(player.marketValue) + "</td>" +
                 "</tr>";
         // console.log(i, rowNumber);
             rowNumber < 16 ? $(newRowContent).appendTo($("#playersTMTable1 tbody")) : $(newRowContent).appendTo($("#playersTMTable2 tbody"));
@@ -148,13 +211,68 @@ function MyClass(session, team, allPlayers, allPlayersSorted) {
             rowNumber++;
         });
 
-        $.each(team.players, function (i, id) {
+        $.each(manager.players, function (i, id) {
             $("#"+id).addClass("disabledPlayerRow");
         });
 
         $(".playerRow").click(function(){
             buyPlayersTemp(this);
         });
-
     };
+
+    this.saveSession = function(){
+        session.lastSave = new Date();
+        $.when(
+            $.ajax({
+                url: "http://localhost:3000/api/managers/" + manager._id,
+                type: "PATCH",
+                data: manager,
+                success: function(response){
+                    console.log("manager saved", response.data);
+                }
+            }),
+            $.ajax({
+                url: "http://localhost:3000/api/sessions/" + session._id,
+                type: "PATCH",
+                data: session,
+                success: function(response){
+                    console.log("session saved", response.data);
+                }
+            })
+        ).then(function(){
+            $.get("html/modals/modal.html", function (data) {
+                $("#modalContainer").html(data);
+                $("#modalContainer").modal('show');
+            });
+
+        });
+    };
+    this.loadSession = function () {
+        $.get("html/modals/loadSessionModal.html", function (data) {
+            $("#modalContainer").html(data);
+            $("#modalContainer").modal('show');
+            $.get("http://localhost:3000/api/sessions/", function (data) {
+                let sessionArray = data.data;
+                $.each(sessionArray, function (index, session) {
+                    var newListItemHtml = "<a class='list-group-item list-group-item-action d-flex' data-toggle='list' href='#'>"+
+                        "<div class='flex-fill'>" + session.name + "</div>" +
+                        "<div><span class='badge badge-pill badge-info'>" + session.lastSave + "</span></div>" +
+                        "</a>";
+                    $("#sessionList").append(newListItemHtml);
+                });
+
+                $("#loadSessionButton").one("click", function () {
+                    let activeSessionItem = $("#sessionList").find(".active");
+                    let index = activeSessionItem.index();
+                    $.get("http://localhost:3000/api/managers/" + sessionArray[index].manager, function (data) {
+                        console.log(data.data);
+                        manager = data.data;
+                        session = sessionArray[index];
+                        setBalanceDisplay();
+                    });
+                })
+            })
+        });
+    }
+
 }

@@ -7,7 +7,7 @@
 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <title>Weltfussballmanager!</title>
 
@@ -33,21 +33,21 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menü</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" id="createNewSessionDropdown" >Neues Spiel</a>
-                            <a class="dropdown-item" href="#">Speichern</a>
-                            <a class="dropdown-item" href="#">Laden</a>
+                            <a class="dropdown-item disabled" href="#" id="saveSessionDropdown">Speichern</a>
+                            <a class="dropdown-item" id="loadSessionDropdown">Laden</a>
                             <a class="dropdown-item" >Separated link</a>
                             <a class="dropdown-item" >Beenden</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mannschaft</a>
+                        <a class="nav-link dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mannschaft</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#" id="aufstellungDropdown" >Aufstellung</a>
                             <a class="dropdown-item" id="trainingDropdown" href="#">Training</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Transfermarkt</a>
+                        <a class="nav-link dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Transfermarkt</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" id="buyPlayerDropdown" >Kaufen</a>
                             <a class="dropdown-item" id="verkaufenDropdown">Verkaufen</a>
@@ -55,7 +55,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stadion</a>
+                        <a class="nav-link dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stadion</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Eintritt</a>
                             <a class="dropdown-item" href="#">Ausbauen</a>
@@ -65,7 +65,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Zum Spieltag</a>
+                        <a class="nav-link disabled" href="#">Zum Spieltag</a>
                     </li>
                 </ul>
             </div>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col">
                     <span class="badge badge-secondary">Kontostand:</span>
-                    <span class="balanceDisplay"></span>
+                    <span class="balanceDisplay"> - </span>
 
                 </div>
             </div>
@@ -128,6 +128,7 @@
         </div>
 
     </footer>
+    <div class="modal fade" id="modalContainer" role="dialog"></div>
     <!--<button id="addGoal">append Tor</button>-->
 <!--<button id="addDef">append Abwehrspielr</button>-->
 <!--<button id="addMiddf">append Mittelfeld</button>-->

@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 
 // Setup schema
 var sessionSchema = mongoose.Schema({
-    managerName: {type: String, required: true},
-    bankBalance: {type: Number, required: true},
-    team:{ type: Schema.Types.ObjectId, ref: 'Team' }
+    name: {type: String, required: true},
+    manager:{ type: Schema.Types.ObjectId, ref: 'Manager' },
+    lastSave:{type: Date, required: true}
 });
 
 // Export Contact model

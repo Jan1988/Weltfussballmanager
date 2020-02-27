@@ -24,17 +24,17 @@ router.route('/players/:player_id')
 
 
 // Import team controller
-var teamController = require('../controllers/teamController');
-// Team routes
-router.route('/teams')
-    .get(teamController.index)
-    .post(teamController.new);
+var managerController = require('../controllers/managerController');
+// Manager routes
+router.route('/managers')
+    .get(managerController.index)
+    .post(managerController.new);
 
-router.route('/teams/:team_id')
-    .get(teamController.view)
-    .patch(teamController.update)
-    .put(teamController.update)
-    .delete(teamController.delete);
+router.route('/managers/:manager_id')
+    .get(managerController.view)
+    .patch(managerController.update)
+    .put(managerController.update)
+    .delete(managerController.delete);
 
 
 // Import team controller
