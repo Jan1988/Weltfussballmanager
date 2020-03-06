@@ -6,7 +6,8 @@ var managerSchema = mongoose.Schema({
     name: {type: String, required: true},
     teamName: {type: String, required: true},
     bankBalance: {type: Number, required: true},
-    players : [{ type: Schema.Types.ObjectId, ref: 'Player' }]
+    players : [{ type: Schema.Types.ObjectId, ref: 'Player' }],
+    starters : [{ type: Schema.Types.ObjectId, ref: 'Player' }]
 });
 
 var Manager = module.exports = mongoose.model('Manager', managerSchema);

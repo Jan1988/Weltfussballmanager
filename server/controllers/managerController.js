@@ -28,6 +28,7 @@ exports.new = function (req, res) {
     manager.bankBalance = req.body.bankBalance;
 
     manager.players = [];
+    manager.starters = [];
 
     // save manager and check for errors
     manager.save(function (err) {
@@ -61,6 +62,7 @@ exports.update = function (req, res) {
         manager.teamName = req.body.teamName;
         manager.bankBalance = req.body.bankBalance;
         manager.players = req.body.players;
+        manager.starters = req.body.starters;
 
         // save the player and check for errors
         manager.save(function (err) {
